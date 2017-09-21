@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <constant name="struts.action.extension" value="action"></constant>
+    <constant name="struts.devMode" value="true" />
+    <constant name="struts.i18n.encoding" value="utf-8" />
+     <package name="registeration" namespace="/" extends="struts-default,json-default">
+<!-- 检测登录****************************************************   -->
+        <action name="userLogin"  class="com.jpg.hebei.action.LoginAction" method="login">
+            <result name="puser">/puser/main.jsp</result>
+            <result name="suser">/suser/smain.jsp</result>
+            <result name="guser">/guser/gmain.jsp</result>
+            <!-- <result name="fail">/error.jsp</result> -->
+        </action>
+<!-- 普通用户密码修改，信息加载************************************************  --> 
+         <action name="userLoad"  class="com.jpg.hebei.action.UserAction" method="loadUser">
+            <result name="success">/puser/updatepwd.jsp</result>
+           <!--  <result name="fail">/error.jsp</result> -->
+        </action>
+<!-- 审核员密码修改功能,信息加载**************************************************** -->   
+        <action name="suserLoad"  class="com.jpg.hebei.action.SuserAction" method="loadSuser">
+            <result name="success">/suser/spwdupdate.jsp</result>
+        </action>
+<!-- 用户注册*******************************************************  --> 
+        <action name="userRegister" class="com.jpg.hebei.action.UserAction" method="register">
+        </action>
+<!--普通用户密码修改*********************************************  --> 
+         <action name="userPassword" class="com.jpg.hebei.action.UserAction" method="updatePassword">
+        </action>
+<!--审核用户密码修改********************************************   --> 
+        <action name="suserPassword" class="com.jpg.hebei.action.SuserAction" method="updatePassword">
+           <!--  <result name="success">/templete/open.html</result> -->
+             <!-- <result name="success">/index.jsp</result> -->
+        </action>
+<!--需求提交***************************************************************   -->    
+        <action name="informationAdd" class="com.jpg.hebei.action.InformationAction" method="addInformation">
+           <!--  <result name="success" type="chain">informationChakan</result> -->
+        </action>
+<!--  需求填报********************************************    -->    
+        <action name="informationTianbao" class="com.jpg.hebei.action.InformationAction" method="existsInformation">
+            <result name="ifn2">/puser/information1.jsp</result>
+            <result name="ifn1">/puser/information.jsp</result>
+        </action>
+<!-- 我的需求查看*****************************************    -->   
+         <action name="informationChakan" class="com.jpg.hebei.action.InformationAction" method="loadMyInformations">
+            <result name="success">/puser/xuqiuchakan.jsp</result>
+            <!-- <result name="fail">/error.jsp</result> -->
+        </action>
+<!-- 我的需求详细****************************************** -->
+        <action name="informationXiangxi" class="com.jpg.hebei.action.InformationAction" method="loadInformation">
+            <result name="success">/puser/xuqiuxiangxi.jsp</result>
+        </action>
+<!--我的需求删除********************************************* -->
+        <action name="informationDel" class="com.jpg.hebei.action.InformationAction" method="delInformation">
+            <!-- <result name="success" type="chain">informationChakan</result> -->
+           <!--  <result name="fail">/information.jsp</result> -->
+        </action>
+<!-- 修改需求加载***********************************************   -->
+        <action name="informationEdit" class="com.jpg.hebei.action.InformationAction" method="loadInformation">
+            <result name="success">/puser/updatexuqiu.jsp</result>
+            <!-- <result name="fail">/information.jsp</result> -->
+        </action>
+<!-- 需求修改提交***************************************************  --> 
+         <action name="informationUpdate" class="com.jpg.hebei.action.InformationAction" method="updateInformation">
+            <!-- <result name="success" type="chain">informationChakan</result> -->
+            <!-- <result name="fail">/information.jsp</result> -->
+        </action>
+<!--需求形式审核分页展示**********************************************   -->
+        <action name="informationList" class="com.jpg.hebei.action.PageAction" method="fenye">
+             <result name="success" >/suser/xshenhe.jsp</result>
+        </action> 
+<!--需求部门审核分页展示**********************************************  --> 
+      <action name="binformationList" class="com.jpg.hebei.action.PageAction" method="fenye">
+             <result name="success" >/suser/jshenhe.jsp</result>
+        </action> 
+<!--形式审核提交****************************************************    -->
+         <action name="informationShenhe" class="com.jpg.hebei.action.InformationAction" method="loadInformation">
+            <result name="success">/suser/xshenhejudge.jsp</result>
+        </action>
+<!-- 部门审核提交*******************************************************    -->
+        <action name="binformationShenhe" class="com.jpg.hebei.action.InformationAction" method="loadInformation">
+            <result name="success">/suser/jshenhejudge.jsp</result>
+        </action>
+<!-- 形式审核提交********************************************************    -->
+         <action name="informationShenheTijiao" class="com.jpg.hebei.action.InformationAction" method="updateIfnXshenhe">
+        </action>
+<!--  部门审核提交**********************************************************   -->
+        <action name="informationBShenheTijiao" class="com.jpg.hebei.action.InformationAction" method="updateIfnBshenhe">
+        </action>
+<!--分类检索分页展示*************************************************** -->
+        <action name="retrieveInformation" class="com.jpg.hebei.action.RetrieveAction" method="fenye">
+             <result name="success" >/suser/zjiansuo.jsp</result>
+        </action> 
+<!--分类检索详细信息展示*************************************************** -->
+        <action name="informationSxiangxi" class="com.jpg.hebei.action.InformationAction" method="loadInformation">
+             <result name="success" >/suser/xuqiuSxiangxi.jsp</result>
+        </action>   
+
+<!--    高级检索 -->
+	 <action name="highSearch" class="com.jpg.hebei.action.HighSearchAction" method="highSearch">
+	     <result name="success">/suser/highSearchDisplay.jsp         
+         </result>
+         
+	 </action>    
+    </package> 
+    
+
+  <!--饼状图检索*************************************************** -->
+ <package name="query" namespace="/" extends="jfreechart-default">
+   <action name="pieChart3D" class="com.jpg.hebei.action.PieChart3DAction">
+       <result type="chart">
+       <param name="width">700</param>
+       <param name="height">400</param>
+       </result>
+      </action>             
+    </package> 
+    <!-- Add packages here -->
+    
+</struts>
